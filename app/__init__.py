@@ -3,7 +3,7 @@ from .config import config
 from .extensions import db , migrate
 
 from app.class1.model import classe1_api
-from app.class2.model import classe2_api
+from app.class2.model import class2_api
 
 
 
@@ -16,7 +16,7 @@ def create_app():
     migrate.init_app(app,db)
 
     app.register_blueprint(classe1_api)
-    app.register_blueprint(classe2_api)
+    app.register_blueprint(class2_api)
     
 
 
