@@ -2,8 +2,8 @@ from flask import Flask
 from .config import config
 from .extensions import db , migrate
 
-from app.class1.model import classe1_api
-from app.class2.model import class2_api
+from app.cliente.model import cliente_api
+from app.unidade.model import unidade_api
 
 
 
@@ -15,8 +15,8 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app,db)
 
-    app.register_blueprint(classe1_api)
-    app.register_blueprint(class2_api)
+    app.register_blueprint(cliente_api)
+    app.register_blueprint(unidade_api)
     
 
 
