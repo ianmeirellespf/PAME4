@@ -19,6 +19,8 @@ class Cliente(BaseModel):
     id = db.Column(db.Integer , primary_key=True)
     nome = db.Column(db.String(100))
     cpf=db.Column(db.String(11))
+    email = db.Column(db.String(100))
+    endereço = db.Column(db.String(100)) # a principio pode ficar como nulo, mas quando for desenvolvido o app, vai ajudar .
     idade=db.Column(db.Integer)
     genero=db.Column(db.String(16))
     unidades = db.relationship("unidade", secondary = "cliente_unidade", backref="clientes")

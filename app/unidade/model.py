@@ -13,8 +13,8 @@ class Unidade(BaseModel):
     endereço=db.Column(db.String(100))
     receita=db.Column(db.Float)
     lucro=db.Column(db.Float)
-    horaAbre=db.Column(db.Time)
-    horaFecha=db.Column(db.Time)
+    horaAbre=db.Column(db.String(16))#o horario ja virá tratado pelo fronte trate
+    horaFecha=db.Column(db.String(16))#o horario ja virá tratado pelo fronte trate
     funcionarios= db.relationship("funciorario", backref="unidade")
     
     

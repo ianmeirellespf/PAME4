@@ -21,4 +21,7 @@ class Venda(BaseModel):
     data= db.Column(db.Date)
     produtos = db.relationship("produto", secondary = "venda_produto", backref="vendascontendo")
     cliente = db.Column(db.Integer, db.ForeignKey("cliente.id"))
-    avaliaçao=db.Column(db.Float)   #avaliação da qualidade do atendimento e todo o conjunto 
+    avaliaçao=db.Column(db.Float)        #avaliação da qualidade do atendimento e todo o conjunto 
+
+    delivery = db.Column(db.Boolean)      #quando o site for desenvolvido , vai ajudar a saber se era ou não delivery, por ser atrelado a um cliente, o endereço ja estará la.
+    

@@ -15,6 +15,7 @@ class Produto(BaseModel):
     valor = db.Column(db.Float)
     estoque= db.Column(db.Integer)
     validade = db.Column(db.Date)
-    localEstoque = db.Column(db.String(6))
+    localEstoque = db.Column(db.String(6))     # esse e o abaixo so indicam em que locais da loja ficará o produto, por organização.
     localBalcao = db.Column(db.String(6))
-    categoria = db.Column(db.String(50))
+    categoria = db.Column(db.String(50))       # como beleza, higiene e etc.
+    receita = db.Column(db.Boolean)            #o True indicaria a necessidade de receita.
