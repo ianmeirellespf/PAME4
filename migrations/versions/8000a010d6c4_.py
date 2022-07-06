@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 3fed4c396c5f
+Revision ID: 8000a010d6c4
 Revises: 
-Create Date: 2022-07-06 00:26:58.458182
+Create Date: 2022-07-06 15:38:03.511061
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '3fed4c396c5f'
+revision = '8000a010d6c4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,19 +26,23 @@ def upgrade():
     sa.Column('endereço', sa.String(length=100), nullable=True),
     sa.Column('idade', sa.Integer(), nullable=True),
     sa.Column('genero', sa.String(length=16), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('cpf')
     )
     op.create_table('produto',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('nome', sa.String(length=50), nullable=True),
     sa.Column('valor', sa.Float(), nullable=True),
     sa.Column('estoque', sa.Integer(), nullable=True),
-    sa.Column('validade', sa.Date(), nullable=True),
+    sa.Column('validade', sa.String(length=20), nullable=True),
+    sa.Column('marca', sa.String(length=50), nullable=True),
     sa.Column('localEstoque', sa.String(length=6), nullable=True),
     sa.Column('localBalcao', sa.String(length=6), nullable=True),
     sa.Column('categoria', sa.String(length=50), nullable=True),
     sa.Column('receita', sa.Boolean(), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.Column('lote', sa.String(length=50), nullable=True),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('lote')
     )
     op.create_table('unidade',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -48,7 +52,8 @@ def upgrade():
     sa.Column('lucro', sa.Float(), nullable=True),
     sa.Column('horaAbre', sa.String(length=16), nullable=True),
     sa.Column('horaFecha', sa.String(length=16), nullable=True),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('endereço')
     )
     op.create_table('cliente_unidade',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -64,22 +69,23 @@ def upgrade():
     sa.Column('cpf', sa.String(length=11), nullable=True),
     sa.Column('email', sa.String(length=100), nullable=True),
     sa.Column('idade', sa.Integer(), nullable=True),
-    sa.Column('genero', sa.String(length=16), nullable=True),
     sa.Column('salario', sa.Float(), nullable=True),
     sa.Column('endereço', sa.String(length=100), nullable=True),
     sa.Column('telefone', sa.String(length=16), nullable=True),
     sa.Column('cargo', sa.String(length=30), nullable=True),
+    sa.Column('genero', sa.String(length=16), nullable=True),
     sa.Column('unidade', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['unidade'], ['unidade.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('cpf')
     )
     op.create_table('venda',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('valor', sa.Float(), nullable=True),
-    sa.Column('data', sa.Date(), nullable=True),
-    sa.Column('cliente', sa.Integer(), nullable=True),
+    sa.Column('data', sa.String(length=50), nullable=True),
     sa.Column('avaliaçao', sa.Float(), nullable=True),
     sa.Column('delivery', sa.Boolean(), nullable=True),
+    sa.Column('cliente', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['cliente'], ['cliente.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
