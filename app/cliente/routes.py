@@ -1,4 +1,3 @@
-from crypt import methods
 from app.cliente.model import cliente_api
 from app.cliente.controler import clienteCreate , clienteDetalhes
 

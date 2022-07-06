@@ -6,7 +6,7 @@ from app.cliente.model import cliente_api
 from app.unidade.model import unidade_api
 from app.produto.model import produto_api
 from app.funcionario.model import funcionario_api
-from app.vendas.model import venda_api
+from app.venda.model import venda_api
 
 
 
