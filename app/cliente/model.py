@@ -18,7 +18,7 @@ class Cliente(BaseModel):
 
     id = db.Column(db.Integer , primary_key=True)
     nome = db.Column(db.String(100))
-    cpf=db.Column(db.String(11))
+    cpf=db.Column(db.String(11) , unique = True)
     email = db.Column(db.String(100))
     endereço = db.Column(db.String(100)) # a principio pode ficar como nulo, mas quando for desenvolvido o app, vai ajudar .
     idade=db.Column(db.Integer)

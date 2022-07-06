@@ -15,21 +15,17 @@ class clienteCreate(MethodView):  # a rota dela é /registro
         endereço = body.get('endereço') 
         idade=body.get('idade')
         genero=body.get('genero')
-        unidades = body.get('unidade')
-        compras = body.get('caompras')
+        
 
-        if isinstance(id,int) and \
-            isinstance(nome,str) and \
+        if  isinstance(nome,str) and \
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
                         isinstance(endereço,str) and \
                             isinstance(idade,int) and \
-                                isinstance(genero,str) and \
-                                    isinstance(unidades,int) and \
-                                        isinstance(compras,int) :
+                                isinstance(genero,str) :
 
 
-            cliente = Cliente.query.filter_by(id=id).first()
+            cliente = Cliente.query.filter_by(cpf=cpf).first()
 
             if cliente:   #pelo id ser criado pelo sistema, essa verificação pode não se rnecessaria , mas decidi colocar.
                 return {"code_status": "Cliente ja cadastrado" } , 400
