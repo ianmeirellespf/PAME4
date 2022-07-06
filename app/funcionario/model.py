@@ -20,5 +20,6 @@ class Funcionario(BaseModel):
     endereço = db.Column(db.String(100))
     telefone = db.Column(db.String(16))
     cargo =db.Column(db.String(30))
+    #relacionamentos
     unidade = db.Column(db.Integer, db.ForeignKey("unidade.id"))
     

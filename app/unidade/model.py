@@ -15,6 +15,7 @@ class Unidade(BaseModel):
     lucro=db.Column(db.Float)
     horaAbre=db.Column(db.String(16))#o horario ja virá tratado pelo fronte trate
     horaFecha=db.Column(db.String(16))#o horario ja virá tratado pelo fronte trate
+    #relacionamentos
     funcionarios= db.relationship("funciorario", backref="unidade")
     
     
