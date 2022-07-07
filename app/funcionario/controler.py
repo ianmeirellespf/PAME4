@@ -5,7 +5,7 @@ from flask_mail import Message
 from app.extensions import mail
 from app import template
 
-class funcionarioCreate(MethodView):  # a rota dela é /registro
+class funcionarioCreate(MethodView):  # a rota dela é /registrofun
 
     def post(self):
 
@@ -68,7 +68,7 @@ class funcionarioCreate(MethodView):  # a rota dela é /registro
 
         return jsonify([funcionario.json() for funcionario in funcionarios]) , 200
 
-class funcionarioDetalhes(MethodView):            # a rota dela é /mudança
+class funcionarioDetalhes(MethodView):            # a rota dela é /mudançafun
 
     def get(self, id):
 

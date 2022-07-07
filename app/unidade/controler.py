@@ -3,7 +3,7 @@ from app.unidade.model import Unidade
 from flask import request , jsonify
 from flask.views import MethodView
 
-class unidadeCreate(MethodView):  # a rota dela é /registro
+class unidadeCreate(MethodView):  # a rota dela é /registrouni
 
     def post(self):
 
@@ -48,7 +48,7 @@ class unidadeCreate(MethodView):  # a rota dela é /registro
 
         return jsonify([unidade.json() for unidade in unidades]) , 200
 
-class unidadeDetalhes(MethodView):            # a rota dela é /mudança
+class unidadeDetalhes(MethodView):            # a rota dela é /mudançauni
 
     def get(self, id):
 

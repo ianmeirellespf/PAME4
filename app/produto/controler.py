@@ -3,7 +3,7 @@ from app.produto.model import Produto
 from flask import request , jsonify
 from flask.views import MethodView
 
-class produtoCreate(MethodView):  # a rota dela é /registro
+class produtoCreate(MethodView):  # a rota dela é /registropro
 
     def post(self):
 
@@ -60,7 +60,7 @@ class produtoCreate(MethodView):  # a rota dela é /registro
 
         return jsonify([produto.json() for produto in produtos]) , 200
 
-class produtoDetalhes(MethodView):            # a rota dela é /mudança
+class produtoDetalhes(MethodView):            # a rota dela é /mudançapro
 
     def get(self, id):
 

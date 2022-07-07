@@ -2,7 +2,7 @@ from app.venda.model import Venda
 from flask import request , jsonify
 from flask.views import MethodView
 
-class vendaCreate(MethodView):  # a rota dela é /registro
+class vendaCreate(MethodView):  # a rota dela é /registroven
 
     def post(self):
 
@@ -41,7 +41,7 @@ class vendaCreate(MethodView):  # a rota dela é /registro
 
         return jsonify([venda.json() for venda in vendas]) , 200
 
-class vendaDetalhes(MethodView):            # a rota dela é /mudança
+class vendaDetalhes(MethodView):            # a rota dela é /mudançaven
 
     def get(self, id):
 

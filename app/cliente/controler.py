@@ -5,7 +5,7 @@ from flask_mail import Message
 from app.extensions import mail
 from app import template
 
-class clienteCreate(MethodView):  # a rota dela é /registro
+class clienteCreate(MethodView):  # a rota dela é /registrocli
                                   #no codigo , a senha está sendo tratado como um codigo qualquer por enquanto, mas será privado.
     def post(self):
 
@@ -59,7 +59,7 @@ class clienteCreate(MethodView):  # a rota dela é /registro
 
         return jsonify([cliente.json() for cliente in clientes]) , 200
 
-class clienteDetalhes(MethodView):            # a rota dela é /mudança
+class clienteDetalhes(MethodView):            # a rota dela é /mudançacli
 
     def get(self, id):
 
