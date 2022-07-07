@@ -19,15 +19,13 @@ class Unidade(BaseModel):
     def json(self):
 
         return{
-            "id": self.id ,
+            
             "nome": self.nome ,
             "endereço": self.endereço ,
             "receita": self.receita ,
             "lucro": self.lucro ,
             "horaAbre": self.horaAbre ,
-            "horaFecha": self.horaFecha 
-            
-            
+            "horaFecha": self.horaFecha      
         }
     
     

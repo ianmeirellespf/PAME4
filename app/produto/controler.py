@@ -9,7 +9,7 @@ class produtoCreate(MethodView):  # a rota dela é /registropro
 
         body = request.json
 
-        id = body.get('id')
+        
         nome = body.get('nome')
         valor = body.get('valor')
         estoque= body.get('estoque')

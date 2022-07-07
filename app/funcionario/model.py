@@ -25,7 +25,7 @@ class Funcionario(BaseModel):
     def json(self):
 
         return{
-            "id": self.id ,
+            
             "nome": self.nome ,
             "cpf": self.cpf , #o CPF assim como em alguns sites, será o "username" de login.
             "email": self.email ,
@@ -35,8 +35,7 @@ class Funcionario(BaseModel):
             "salario": self.salario ,
             "telefone": self.telefone ,
             "cargo": self.cargo ,
-            "genero": self.genero ,
-            "unidade": self.unidade 
+            "genero": self.genero 
             
         }
     

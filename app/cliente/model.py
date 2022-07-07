@@ -24,21 +24,20 @@ class Cliente(BaseModel):
     genero=db.Column(db.String(16))
     #relacionamentos
     unidades = db.relationship("unidade", secondary = "cliente_unidade", backref="clientes")
-    compras = db.relationship("Venda", backref="cliente")
+    compras = db.relationship("venda", backref="cliente")
     
     def json(self):
 
         return{
-            "id": self.id , #não é necessario.
+            
             "nome": self.nome ,
             "cpf": self.cpf ,  #o CPF assim como em alguns sites, será o "username" de login.
             "email": self.email ,
             "senha": self.senha ,
             "endereço": self.endereço ,
             "idade": self.idade ,
-            "genero": self.genero ,
-            "unidades": self.unidades ,
-            "compras": self.compras 
+            "genero": self.genero 
+            
         }
 
 

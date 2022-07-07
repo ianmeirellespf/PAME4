@@ -23,7 +23,7 @@ class Produto(BaseModel):
     def json(self):
 
         return{
-            "id": self.id ,
+            
             "nome": self.nome ,
             "valor": self.valor ,
             "estoque": self.estoque ,

@@ -27,7 +27,7 @@ class Venda(BaseModel):
     def json(self):
 
         return{
-            "id": self.id ,
+            
             "valor": self.valor ,
             "data": self.data ,
             "avaliaçao": self.avaliaçao ,
