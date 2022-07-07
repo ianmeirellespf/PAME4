@@ -20,7 +20,7 @@ class Funcionario(BaseModel):
     cargo =db.Column(db.String(30))
     genero=db.Column(db.String(16))
     #relacionamentos
-    unidade = db.Column(db.Integer, db.ForeignKey("unidade.id"))
+    unidadetrab = db.Column(db.Integer, db.ForeignKey("unidade.id"))
 
     def json(self):
 

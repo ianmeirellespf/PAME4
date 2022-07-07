@@ -20,8 +20,8 @@ class Venda(BaseModel):
     avaliaçao=db.Column(db.Float) #avaliação da qualidade do atendimento e todo o conjunto 
     delivery = db.Column(db.Boolean) #quando o app for desenvolvido , vai ajudar a saber se era ou não delivery, por ser atrelado a um cliente, o endereço ja estará la.
     #relacionamentos
-    produtos = db.relationship("produto", secondary = "venda_produto", backref="vendascontendo")
-    cliente = db.Column(db.Integer, db.ForeignKey("cliente.id"))
+    produtos = db.relationship("Produto", secondary = "venda_produto", backref="vendascontendo")
+    clientecomprou = db.Column(db.Integer, db.ForeignKey("cliente.id"))
 
 
     def json(self):

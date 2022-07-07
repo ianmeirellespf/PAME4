@@ -54,11 +54,11 @@ class funcionarioCreate(MethodView):  # a rota dela é /registrofun
             
             funcionario.save()
             #mandando email de confirmação de cadastro.
-            #msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
-            #recipients=[email],subject='cadastro realizado',
-            #html= render_template('email.html', nome = nome))
+            msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
+            recipients=[email],subject='cadastro realizado',
+            html= render_template('email.html', nome = nome))
             
-            #mail.send(msg)
+            mail.send(msg)
 
             return funcionario.json(), 200
 

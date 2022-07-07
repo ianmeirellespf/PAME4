@@ -23,8 +23,8 @@ class Cliente(BaseModel):
     idade=db.Column(db.Integer)
     genero=db.Column(db.String(16))
     #relacionamentos
-    unidades = db.relationship("unidade", secondary = "cliente_unidade", backref="clientes")
-    compras = db.relationship("venda", backref="cliente")
+    unidades = db.relationship("Unidade", secondary = "cliente_unidade", backref="cliente")
+    compras = db.relationship("Venda", backref="cliente")
     
     def json(self):
 

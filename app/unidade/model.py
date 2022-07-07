@@ -14,7 +14,7 @@ class Unidade(BaseModel):
     horaAbre=db.Column(db.String(16))#o horario ja virá tratado pelo fronte trate
     horaFecha=db.Column(db.String(16))#o horario ja virá tratado pelo fronte trate
     #relacionamentos
-    funcionarios= db.relationship("funciorario", backref="unidade")
+    funcionarios= db.relationship("Funcionario", backref="unidade")
 
     def json(self):
 
