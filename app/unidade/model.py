@@ -1,8 +1,6 @@
 from app.extensions import db
 from app.model import BaseModel
-from flask import Blueprint
 
-unidade_api = Blueprint("unidade_api", __name__)
 
 class Unidade(BaseModel):
 

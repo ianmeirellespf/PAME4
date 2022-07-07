@@ -1,8 +1,6 @@
 from app.extensions import db
 from app.model import BaseModel
-from flask import Blueprint
 
-cliente_api = Blueprint("cliente_api", __name__)
 
 class clienteUnidade(BaseModel):
     __tablename__ = "cliente_unidade"

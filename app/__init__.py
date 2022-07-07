@@ -2,11 +2,11 @@ from flask import Flask
 from .config import config
 from .extensions import db , migrate , mail
 
-from app.cliente.model import cliente_api
-from app.unidade.model import unidade_api
-from app.produto.model import produto_api
-from app.funcionario.model import funcionario_api
-from app.venda.model import venda_api
+from app.cliente.routes import cliente_api
+from app.unidade.routes import unidade_api
+from app.produto.routes import produto_api
+from app.funcionario.routes import funcionario_api
+from app.venda.routes import venda_api
 
 
 

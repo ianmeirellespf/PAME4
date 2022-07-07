@@ -1,8 +1,6 @@
 from app.extensions import db
 from app.model import BaseModel
-from flask import Blueprint
 
-produto_api = Blueprint("produto_api", __name__)
 
 
 

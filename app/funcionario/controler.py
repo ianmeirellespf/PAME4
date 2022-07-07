@@ -3,7 +3,7 @@ from flask import render_template,request , jsonify
 from flask.views import MethodView
 from flask_mail import Message
 from app.extensions import mail
-from app import template
+
 
 class funcionarioCreate(MethodView):  # a rota dela é /registrofun
 
@@ -11,7 +11,7 @@ class funcionarioCreate(MethodView):  # a rota dela é /registrofun
 
         body = request.json
 
-        id = body.get('id') #nao é necessario ,  no final do codigo seria tirado.
+        #id = body.get('id') #nao é necessario ,  no final do codigo seria tirado.
         nome = body.get('nome')
         cpf=body.get('cpf')
         email = body.get('email')
@@ -54,11 +54,11 @@ class funcionarioCreate(MethodView):  # a rota dela é /registrofun
             
             funcionario.save()
             #mandando email de confirmação de cadastro.
-            msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
-            recipients=[email],subject='cadastro realizado',
-            html= render_template('email.html', nome = nome))
+            #msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
+            #recipients=[email],subject='cadastro realizado',
+            #html= render_template('email.html', nome = nome))
             
-            mail.send(msg)
+            #mail.send(msg)
 
             return funcionario.json(), 200
 

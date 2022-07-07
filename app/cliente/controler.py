@@ -3,7 +3,7 @@ from flask import render_template, request , jsonify
 from flask.views import MethodView
 from flask_mail import Message
 from app.extensions import mail
-from app import template
+
 
 class clienteCreate(MethodView):  # a rota dela é /registrocli
                                   #no codigo , a senha está sendo tratado como um codigo qualquer por enquanto, mas será privado.
