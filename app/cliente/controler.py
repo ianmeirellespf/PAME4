@@ -1,9 +1,12 @@
 from app.cliente.model import Cliente
-from flask import request , jsonify
+from flask import render_template, request , jsonify
 from flask.views import MethodView
+from flask_mail import Message
+from app.extensions import mail
+from app import template
 
 class clienteCreate(MethodView):  # a rota dela é /registro
-
+                                  #no codigo , a senha está sendo tratado como um codigo qualquer por enquanto, mas será privado.
     def post(self):
 
         body = request.json
@@ -12,6 +15,7 @@ class clienteCreate(MethodView):  # a rota dela é /registro
         nome = body.get('nome')
         cpf=body.get('cpf')
         email = body.get('email')
+        senha = body.get('senha')
         endereço = body.get('endereço') 
         idade=body.get('idade')
         genero=body.get('genero')
@@ -21,8 +25,9 @@ class clienteCreate(MethodView):  # a rota dela é /registro
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
                         isinstance(endereço,str) and \
-                            isinstance(idade,int) and \
-                                isinstance(genero,str) :
+                            isinstance(senha,str) and \
+                                isinstance(idade,int) and \
+                                    isinstance(genero,str) :
 
 
             cliente = Cliente.query.filter_by(cpf=cpf).first()
@@ -33,11 +38,18 @@ class clienteCreate(MethodView):  # a rota dela é /registro
             cliente = Cliente(nome=nome,
                                 cpf=cpf,
                                 email=email,
+                                senha=senha,
                                 endereço=endereço,
                                 idade=idade,
                                 genero=genero)
             
             cliente.save()
+            #mandando email de confirmação de cadastro.
+            msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
+            recipients=[email],subject='cadastro realizado',
+            html= render_template('email.html', nome = nome))
+            
+            mail.send(msg)
 
             return cliente.json(), 200
 
@@ -64,20 +76,23 @@ class clienteDetalhes(MethodView):            # a rota dela é /mudança
         nome = body.get('nome')
         cpf=body.get('cpf')
         email = body.get('email')
+        senha = body.get('senha')
         endereço = body.get('endereço') 
         idade=body.get('idade')
         genero=body.get('genero')
 
-        if isinstance(nome,str) and \
+        if  isinstance(nome,str) and \
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
                         isinstance(endereço,str) and \
-                            isinstance(idade,int) and \
-                                isinstance(genero,str)  :
+                            isinstance(senha,str) and \
+                                isinstance(idade,int) and \
+                                    isinstance(genero,str) :
             
             cliente.nome=nome
             cliente.cpf=cpf
             cliente.email=email
+            cliente.senha=senha
             cliente.endereço=endereço
             cliente.idade=idade
             cliente.genero=genero
@@ -97,20 +112,23 @@ class clienteDetalhes(MethodView):            # a rota dela é /mudança
         nome = body.get('nome' , cliente.nome)
         cpf=body.get('cpf', cliente.cpf)
         email = body.get('email', cliente.email)
+        senha = body.get('senha', cliente.senha)
         endereço = body.get('endereço', cliente.endereço) 
         idade=body.get('idade', cliente.idade)
         genero=body.get('genero', cliente.genero)
 
-        if isinstance(nome,str) and \
+        if  isinstance(nome,str) and \
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
                         isinstance(endereço,str) and \
-                            isinstance(idade,int) and \
-                                isinstance(genero,str)  :
+                            isinstance(senha,str) and \
+                                isinstance(idade,int) and \
+                                    isinstance(genero,str) :
             
             cliente.nome=nome
             cliente.cpf=cpf
             cliente.email=email
+            cliente.senha=senha
             cliente.endereço=endereço
             cliente.idade=idade
             cliente.genero=genero

@@ -11,9 +11,10 @@ class Funcionario(BaseModel):
     __tablename__ = "funcionario"
 
     id = db.Column(db.Integer , primary_key=True)
-    nome = db.Column(db.String(100))
-    cpf=db.Column(db.String(11), unique = True)
-    email = db.Column(db.String(100))
+    nome = db.Column(db.String(100), nullable = False)
+    cpf=db.Column(db.String(11), unique = True, nullable = False)
+    email = db.Column(db.String(100) , nullable = False)
+    senha = db.Column(db.String(100) , nullable = False)
     idade=db.Column(db.Integer)
     salario =db.Column(db.Float)
     endereço = db.Column(db.String(100))
@@ -28,8 +29,9 @@ class Funcionario(BaseModel):
         return{
             "id": self.id ,
             "nome": self.nome ,
-            "cpf": self.cpf ,
+            "cpf": self.cpf , #o CPF assim como em alguns sites, será o "username" de login.
             "email": self.email ,
+            "senha": self.senha ,
             "endereço": self.endereço ,
             "idade": self.idade ,
             "salario": self.salario ,

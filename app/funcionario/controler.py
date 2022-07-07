@@ -1,6 +1,9 @@
 from app.funcionario.model import Funcionario
-from flask import request , jsonify
+from flask import render_template,request , jsonify
 from flask.views import MethodView
+from flask_mail import Message
+from app.extensions import mail
+from app import template
 
 class funcionarioCreate(MethodView):  # a rota dela é /registro
 
@@ -8,10 +11,11 @@ class funcionarioCreate(MethodView):  # a rota dela é /registro
 
         body = request.json
 
-        id = body.get('id')
+        id = body.get('id') #nao é necessario ,  no final do codigo seria tirado.
         nome = body.get('nome')
         cpf=body.get('cpf')
         email = body.get('email')
+        senha = body.get('senha')
         endereço = body.get('endereço') 
         idade=body.get('idade')
         salario=body.get('salario')
@@ -23,12 +27,13 @@ class funcionarioCreate(MethodView):  # a rota dela é /registro
         if  isinstance(nome,str) and \
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
-                        isinstance(endereço,str) and \
-                            isinstance(idade,int) and \
-                                isinstance(salario,float) and \
-                                    isinstance(telefone,str) and \
-                                        isinstance(cargo,str) and \
-                                            isinstance(genero,str) :
+                        isinstance(senha,str) and \
+                            isinstance(endereço,str) and \
+                                isinstance(idade,int) and \
+                                    isinstance(salario,float) and \
+                                        isinstance(telefone,str) and \
+                                            isinstance(cargo,str) and \
+                                                isinstance(genero,str) :
 
 
             funcionario = Funcionario.query.filter_by(cpf=cpf).first()
@@ -39,6 +44,7 @@ class funcionarioCreate(MethodView):  # a rota dela é /registro
             funcionario = Funcionario(nome=nome,
                                 cpf=cpf,
                                 email=email,
+                                senha=senha,
                                 endereço=endereço,
                                 idade=idade,
                                 salario=salario,
@@ -47,6 +53,12 @@ class funcionarioCreate(MethodView):  # a rota dela é /registro
                                 genero=genero)
             
             funcionario.save()
+            #mandando email de confirmação de cadastro.
+            msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
+            recipients=[email],subject='cadastro realizado',
+            html= render_template('email.html', nome = nome))
+            
+            mail.send(msg)
 
             return funcionario.json(), 200
 
@@ -74,6 +86,7 @@ class funcionarioDetalhes(MethodView):            # a rota dela é /mudança
         nome = body.get('nome')
         cpf=body.get('cpf')
         email = body.get('email')
+        senha = body.get('senha')
         endereço = body.get('endereço') 
         idade=body.get('idade')
         salario=body.get('salario')
@@ -84,16 +97,18 @@ class funcionarioDetalhes(MethodView):            # a rota dela é /mudança
         if  isinstance(nome,str) and \
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
-                        isinstance(endereço,str) and \
-                            isinstance(idade,int) and \
-                                isinstance(salario,float) and \
-                                    isinstance(telefone,str) and \
-                                        isinstance(cargo,str) and \
-                                            isinstance(genero,str) :
+                        isinstance(senha,str) and \
+                            isinstance(endereço,str) and \
+                                isinstance(idade,int) and \
+                                    isinstance(salario,float) and \
+                                        isinstance(telefone,str) and \
+                                            isinstance(cargo,str) and \
+                                                isinstance(genero,str) :
             
             funcionario.nome=nome
             funcionario.cpf=cpf
             funcionario.email=email
+            funcionario.senha=senha
             funcionario.endereço=endereço
             funcionario.idade=idade
             funcionario.salario=salario
@@ -117,6 +132,7 @@ class funcionarioDetalhes(MethodView):            # a rota dela é /mudança
         nome = body.get('nome' ,funcionario.nome )
         cpf=body.get('cpf' ,funcionario.cpf )
         email = body.get('email' , funcionario.email )
+        senha = body.get('senha' , funcionario.senha )
         endereço = body.get('endereço',funcionario.endereço ) 
         idade=body.get('idade',funcionario.idade )
         salario=body.get('salario',funcionario.salario )
@@ -127,16 +143,18 @@ class funcionarioDetalhes(MethodView):            # a rota dela é /mudança
         if  isinstance(nome,str) and \
                 isinstance(cpf,str) and \
                     isinstance(email,str) and \
-                        isinstance(endereço,str) and \
-                            isinstance(idade,int) and \
-                                isinstance(salario,float) and \
-                                    isinstance(telefone,str) and \
-                                        isinstance(cargo,str) and \
-                                            isinstance(genero,str) :
+                        isinstance(senha,str) and \
+                            isinstance(endereço,str) and \
+                                isinstance(idade,int) and \
+                                    isinstance(salario,float) and \
+                                        isinstance(telefone,str) and \
+                                            isinstance(cargo,str) and \
+                                                isinstance(genero,str) :
             
             funcionario.nome=nome
             funcionario.cpf=cpf
             funcionario.email=email
+            funcionario.senha=senha
             funcionario.endereço=endereço
             funcionario.idade=idade
             funcionario.salario=salario

@@ -1,7 +1,15 @@
 from flask_sqlalchemy import SQLAlchemy
+from app.sensive import sen
 
 
 class config:
-    SQLALCHEMY_DATABASE_URI = "sqlite:///data.sqlite"
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = sen.SQLALCHEMY_DATABASE_URI
+    SQLALCHEMY_TRACK_MODIFICATIONS = sen.SQLALCHEMY_TRACK_MODIFICATIONS
+    DEBUG = sen.DEBUG
+
+    MAIL_SERVER = sen.MAIL_SERVER
+    MAIL_PORT = sen.MAIL_PORT
+    MAIL_USERNAME = sen.MAIL_USERNAME
+    MAIL_PASSWORD = sen.MAIL_PASSWORD
+    MAIL_USE_TLS = sen.MAIL_USE_TLS
+    MAIL_USE_SSL = sen.MAIL_USE_SSL
