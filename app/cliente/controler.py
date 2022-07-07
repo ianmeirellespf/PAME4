@@ -3,6 +3,7 @@ from flask import render_template, request , jsonify
 from flask.views import MethodView
 from flask_mail import Message
 from app.extensions import mail
+import bcrypt
 
 
 class clienteCreate(MethodView):  # a rota dela é /registrocli
@@ -11,11 +12,12 @@ class clienteCreate(MethodView):  # a rota dela é /registrocli
 
         body = request.json
 
-        id = body.get('id')
+        
         nome = body.get('nome')
         cpf=body.get('cpf')
         email = body.get('email')
         senha = body.get('senha')
+        senha = bcrypt.hashpw(senha.encode() , bcrypt.gensalt()).decode() #tornando a senha em criptografia  e adicionando o salt, para não atrapalhar senhas iguais em caso de hacker.
         endereço = body.get('endereço') 
         idade=body.get('idade')
         genero=body.get('genero')

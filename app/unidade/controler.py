@@ -9,7 +9,7 @@ class unidadeCreate(MethodView):  # a rota dela é /registrouni
 
         body = request.json
 
-        id = body.get('id')
+       
         nome = body.get('nome')
         endereço=body.get('endereço')
         receita=body.get('receita')

@@ -2,6 +2,7 @@ from app.extensions import db
 from app.model import BaseModel
 
 
+
 class clienteUnidade(BaseModel):
     __tablename__ = "cliente_unidade"
 
