@@ -191,8 +191,8 @@ class Loginfun(MethodView): # rota /loginfun
 
         funcionario = Funcionario.query.filter_by(cpf = cpf).first() 
 
-        if not funcionario :
-            return {"msg":"não existe esse funcionario"} , 400 
-
-        if bcrypt.checkpw(senha.encode() , funcionario.senha.encode()) :
+        if funcionario and  bcrypt.checkpw(senha.encode() , funcionario.senha.encode()):
             return {"token":create_access_token(funcionario.id , additional_claims={"usuario":"logado"})}
+        return {"msg":"cpf e/ou senha incorretos "} , 400 
+
+        

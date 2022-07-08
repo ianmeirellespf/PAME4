@@ -162,11 +162,11 @@ class Logincli(MethodView):     # rota /logincli
 
         cliente = Cliente.query.filter_by(cpf = cpf).first()
 
-        if not cliente :
-            return {"msg":"não existe esse cliente"} , 400
-
-        if bcrypt.checkpw(senha.encode() , cliente.senha.encode()) :
+        if  cliente and bcrypt.checkpw(senha.encode() , cliente.senha.encode()):
             return {"token":create_access_token(cliente.id , additional_claims={"usuario":"logado"})}
+        return {"msg":"cpf e/ou senha incorretos"} , 400
+
+        
 
         
 
