@@ -1,5 +1,6 @@
 from app.cliente.model import Cliente
 from flask import render_template, request , jsonify
+from flask_jwt_extended import create_access_token
 from flask.views import MethodView
 from flask_mail import Message
 from app.extensions import mail
@@ -149,6 +150,27 @@ class clienteDetalhes(MethodView):            # a rota dela é /mudançacli
         cliente.delete(cliente)
 
         return cliente.json()
+
+
+class Login(MethodView):
+    def post(self):
+
+        body = request.json
+
+        cpf = body.get("cpf") #nesse caso o login é pelo cpf
+        senha = body.get("senha")
+
+        cliente = Cliente.query.filter_by(cpf = cpf).first()
+
+        if not cliente :
+            return {"msg":"não existe esse cliente"} , 400
+
+        if bcrypt.checkpw(senha.encode() , cliente.senha.encode()) :
+            return {"token":create_access_token(cliente.id , additional_claims={"usuario":"logado"})}
+
+        
+
+
 
         
 

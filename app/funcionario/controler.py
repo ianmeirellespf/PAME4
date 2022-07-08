@@ -1,5 +1,6 @@
 from app.funcionario.model import Funcionario
 from flask import render_template,request , jsonify
+from flask_jwt_extended import create_access_token
 from flask.views import MethodView
 from flask_mail import Message
 from app.extensions import mail
@@ -179,3 +180,19 @@ class funcionarioDetalhes(MethodView):            # a rota dela é /mudançafun
         funcionario.delete(funcionario)
 
         return funcionario.json()
+
+class Login(MethodView):
+    def post(self):
+
+        body = request.json
+
+        cpf = body.get("cpf") #nesse caso o login é pelo cpf
+        senha = body.get("senha")
+
+        funcionario = Funcionario.query.filter_by(cpf = cpf).first() 
+
+        if not funcionario :
+            return {"msg":"não existe esse funcionario"} , 400 
+
+        if bcrypt.checkpw(senha.encode() , funcionario.senha.encode()) :
+            return {"token":create_access_token(funcionario.id , additional_claims={"usuario":"logado"})}
