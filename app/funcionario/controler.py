@@ -181,7 +181,7 @@ class funcionarioDetalhes(MethodView):            # a rota dela é /mudançafun
 
         return funcionario.json()
 
-class Login(MethodView):
+class Loginfun(MethodView): # rota /loginfun
     def post(self):
 
         body = request.json

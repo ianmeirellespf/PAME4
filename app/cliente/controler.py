@@ -152,7 +152,7 @@ class clienteDetalhes(MethodView):            # a rota dela é /mudançacli
         return cliente.json()
 
 
-class Login(MethodView):
+class Logincli(MethodView):     # rota /logincli
     def post(self):
 
         body = request.json
