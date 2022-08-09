@@ -1,5 +1,5 @@
 
-from app.unidade.controler import unidadeCreate , unidadeDetalhes
+from app.user.controler import unidadeCreate , unidadeDetalhes
 from flask import Blueprint
 
 unidade_api = Blueprint("unidade_api", __name__)

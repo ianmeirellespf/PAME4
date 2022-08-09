@@ -11,8 +11,9 @@ flask-migrate = "*"
 flask-mail = "*"
 bcrypt = "*"
 flask-jwt-extended = "*"
+marshmallow-sqlalchemy = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
+python_version = "*"
