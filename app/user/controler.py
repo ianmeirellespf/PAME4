@@ -23,4 +23,4 @@ class UserCreate(MethodView):
 
         mail.send(mensagem)
 
-        return schema.dump()
+        return schema.dump( user ) , 201

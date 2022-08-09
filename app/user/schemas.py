@@ -12,7 +12,7 @@ class Userschema(ma.SQLAlchemySchema) :
     nome = ma.String(requiered = True)
     email =ma.Email(requiered = True)
     cpf=ma.String(requiered = True)
-    senha=ma.String(requiered = True)
+    senha=ma.String(load_only=True ,requiered = True)
     data_nascimento = ma.String(requiered = True)
     genero = ma.String(requiered = True)
 
