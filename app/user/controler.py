@@ -22,4 +22,5 @@ class UserCreate(MethodView):
                             html =render_template('email.html', nome = user.nome) )
 
         mail.send(mensagem)
-        return 
+
+        return schema.dump()
