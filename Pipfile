@@ -12,6 +12,7 @@ flask-mail = "*"
 bcrypt = "*"
 flask-jwt-extended = "*"
 marshmallow-sqlalchemy = "*"
+flask-marshmallow = "*"
 
 [dev-packages]
 

@@ -1,8 +1,9 @@
 
-from app.user.controler import unidadeCreate , unidadeDetalhes
 from flask import Blueprint
+from app.user.controler import UserPost, UserId, UserLogin
 
-unidade_api = Blueprint("unidade_api", __name__)
+user_api = Blueprint("user_api", __name__)
 
-unidade_api.add_url_rule('/registrouni', view_func= unidadeCreate.as_view("cria_unidade") , methods = ['POST' , 'GET'])
-unidade_api.add_url_rule('/mudançauni', view_func= unidadeDetalhes.as_view("muda_unidade") , methods = ['GET' , 'PUT' , 'PATCH' , 'DELETE'])
+user_api.add_url_rule("/criauser", view_func=UserPost.as_view("user_post"), methods=["POST"])
+user_api.add_url_rule("/criauser/<int:id>", view_func=UserId.as_view("user_ids"), methods=["GET", "PUT", "PATCH", "DELETE"])
+user_api.add_url_rule("/loginUser", view_func=UserLogin.as_view("user_login"), methods=["POST"])

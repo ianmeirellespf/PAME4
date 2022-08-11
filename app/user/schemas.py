@@ -1,5 +1,6 @@
 from ..extensions import ma
 from ..user.model import User
+from marshmallow import fields
 
 class Userschema(ma.SQLAlchemySchema) :
 
@@ -16,3 +17,6 @@ class Userschema(ma.SQLAlchemySchema) :
     data_nascimento = ma.String(requiered = True)
     genero = ma.String(requiered = True)
 
+class UserLoginschema(ma.Schema):
+    email = ma.Email(required=True)
+    password = ma.String(required=True, load_only=True)
