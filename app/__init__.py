@@ -3,6 +3,7 @@ from .config import config
 from .extensions import db , migrate , mail , jwt
 
 from app.user.routes import user_api
+from app.auth.routes import auth_api
 
 
 
@@ -20,6 +21,7 @@ def create_app():
     jwt.init_app(app)
 
     app.register_blueprint(user_api)
+    app.register_blueprint(auth_api)
     
     
     

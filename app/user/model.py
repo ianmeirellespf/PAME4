@@ -1,6 +1,8 @@
 from app.extensions import db
 from app.model import BaseModel
 import bcrypt
+from flask_jwt_extended import create_access_token, jwt_required , create_refresh_token , decode_token
+from datetime import timedelta
 
 class User(BaseModel):
 
@@ -33,3 +35,27 @@ def verify_password (self, senha) -> bool  :
     '''função que compara a senha'''
 
     return bcrypt.checkpw(senha.encode(),self.senha_hash) 
+
+def token(self) -> str:
+
+    return create_access_token(identity=self.id,
+                               expires_delta=timedelta(minutes=1000),
+                               fresh=True)
+
+def refresh_token(self) -> str:
+
+    return create_refresh_token(identity=self.id,
+                                expires_delta=timedelta(minutes=3000))
+
+@staticmethod
+def verify_token(token) -> object :
+
+    try:
+        data = decode_token(token)
+    
+    except:
+        return None
+
+    user = User.query.get(data['identity'])
+
+    return user
