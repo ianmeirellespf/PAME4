@@ -16,6 +16,7 @@ class Userschema(ma.SQLAlchemySchema) :
     senha=ma.String(load_only=True ,requiered = True)
     data_nascimento = ma.String(requiered = True)
     genero = ma.String(requiered = True)
+    role_user = ma.String( required=True)
 
 class UserLoginschema(ma.Schema):
     email = ma.Email(required=True)

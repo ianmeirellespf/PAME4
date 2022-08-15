@@ -1,12 +1,12 @@
 from app.user.model import *
 from app.user.schemas import Userschema ,UserLoginschema
 from app.user.services import user_services
-from flask import request, jsonify, render_template
+from flask import request
 from flask.views import MethodView
-import bcrypt
 from flask_jwt_extended import create_access_token, jwt_required , create_refresh_token , get_jwt_identity
 from app.utils.filters import filter
 from datetime import timedelta
+from permissions import self_aluno_only , self_professor_only
 
 
 class UserPost(MethodView): 
@@ -14,12 +14,13 @@ class UserPost(MethodView):
     def post(self):
         schema = Userschema()
         user = user_services.create(request.json, schema=schema)
+        user.role_specify()
 
         return schema.dump(user)
 
 class UserId(MethodView): 
 	
-    decorators = [jwt_required()]
+    decorators = [jwt_required(),self_aluno_only()]
     def get(self, id):
         schema = filter.getSchema(
                                   qs = request.args, schema_cls = Userschema

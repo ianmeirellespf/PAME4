@@ -3,6 +3,9 @@ from app.model import BaseModel
 import bcrypt
 from flask_jwt_extended import create_access_token, jwt_required , create_refresh_token , decode_token
 from datetime import timedelta
+from app.aluno.model import Aluno
+from app.professor.model import Professor
+from permissions import self_aluno_only , self_professor_only
 
 class User(BaseModel):
 
@@ -15,9 +18,39 @@ class User(BaseModel):
     data_nascimento = db.Column(db.String(20))
     genero = db.Column(db.String(20))
 
+    role_user = db.Column(db.String(30))
 
-    #relacionamento many-to-many
+
+    #relacionamento one-to-many
+    professor= db.relationship('Professor' , back_populates = 'user' , uselist = False)
+    aluno= db.relationship('Aluno' , back_populates = 'user' , uselist = False)
     #salas()
+
+
+
+@property
+def role(self):
+    return self.role_user
+
+@role.setter
+def role(self , role):
+
+    if role.lower() in ('professor' , 'aluno'):
+        self.role_user = role.lower()
+    else:
+        raise KeyError('role nao especificado')
+
+def role_specify(self):
+    if self.role_user == 'aluno':
+        user_specified = Aluno(user_id=self.id)
+        user_specified.save()
+    else:
+        user_specified = Professor(user_id=self.id)
+        user_specified.save()
+
+
+
+
 
 @property
 def senha(self):
@@ -40,7 +73,8 @@ def token(self) -> str:
 
     return create_access_token(identity=self.id,
                                expires_delta=timedelta(minutes=1000),
-                               fresh=True)
+                               fresh=True,
+                               additional_claims={"role_user" : self.role_user})
 
 def refresh_token(self) -> str:
 
