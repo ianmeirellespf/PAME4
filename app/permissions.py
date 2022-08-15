@@ -3,12 +3,12 @@ from flask_jwt_extended import verify_jwt_in_request,  get_jwt
 
 def self_aluno_only():
     def wrapper(fn):
-        @wrapper(fn)
+        @wraps(fn)
         def decorator(*args , **kwargs):
 
             verify_jwt_in_request()
 
-            if 'aluno ' != get_jwt()['role_user']:
+            if 'aluno' != get_jwt()['role_user']:
                 return {'msg':'não autorizado'}
 
             return fn(*args , **kwargs)
@@ -18,7 +18,7 @@ def self_aluno_only():
 
 def self_professor_only():
     def wrapper(fn):
-        @wrapper(fn)
+        @wraps(fn)
         def decorator(*args , **kwargs):
 
             verify_jwt_in_request()

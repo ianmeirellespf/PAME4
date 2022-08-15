@@ -6,7 +6,7 @@ from flask.views import MethodView
 from flask_jwt_extended import create_access_token, jwt_required , create_refresh_token , get_jwt_identity
 from app.utils.filters import filter
 from datetime import timedelta
-from permissions import self_aluno_only , self_professor_only
+from app.permissions import self_aluno_only , self_professor_only
 
 
 class UserPost(MethodView): 

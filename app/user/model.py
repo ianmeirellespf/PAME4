@@ -5,7 +5,7 @@ from flask_jwt_extended import create_access_token, jwt_required , create_refres
 from datetime import timedelta
 from app.aluno.model import Aluno
 from app.professor.model import Professor
-from permissions import self_aluno_only , self_professor_only
+from app.permissions import self_aluno_only , self_professor_only
 
 class User(BaseModel):
 

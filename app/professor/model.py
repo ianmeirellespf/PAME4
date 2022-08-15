@@ -3,9 +3,9 @@ from app.model import BaseModel
 
 class Professor(BaseModel) :
 
-    _tablename_= 'professor'
+    _tablename_= "professor"
 
-    id = db.Column(db.Integer , primary_Key = True , autoincrement = True)
+    id = db.Column(db.Integer, primary_key=True)
 
-    user_id = db.Column(db.Integer , db.ForeignKey('user.id'))
-    user = db.Relationship ("User", back_populates = 'professor')
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship ("User", back_populates = "professor")

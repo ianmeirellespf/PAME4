@@ -3,9 +3,9 @@ from app.model import BaseModel
 
 class Aluno(BaseModel) :
 
-    _tablename_= 'aluno'
+    _tablename_= "aluno"
 
-    id = db.Column(db.Integer , primary_Key = True , autoincrement = True)
+    id = db.Column(db.Integer, primary_key=True)
 
-    user_id = db.Column(db.Integer , db.ForeignKey('user.id'))
-    user = db.Relationship ("User", back_populates = 'aluno')
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    user = db.relationship ("User", back_populates = "aluno")
