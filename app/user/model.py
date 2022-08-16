@@ -16,8 +16,9 @@ class User(BaseModel):
     cpf=db.Column(db.String(11) , unique = True) #nesse caso , a receita é em relação ao dinheiro
     senha_hash=db.Column(db.LargeBinary(128))
     data_nascimento = db.Column(db.String(20))
-    genero = db.Column(db.String(20))
     role_user = db.Column(db.String(30))
+    genero = db.Column(db.String(20))
+   
 
 
     #relacionamento one-to-many
@@ -27,7 +28,7 @@ class User(BaseModel):
 
 
 
-    @property
+    '''@property
     def role(self):
         return self.role_user
 
@@ -37,7 +38,7 @@ class User(BaseModel):
         if newrole.lower() in ('professor' , 'aluno'):
             self.role_user = newrole.lower()
         else:
-            raise KeyError('role nao especificado')
+            raise KeyError('role nao especificado')'''
 
     def role_specify(self):
         if self.role_user == 'aluno':
@@ -50,7 +51,27 @@ class User(BaseModel):
 
 
 
+    @property
+    def role(self):
 
+        '''Function that returns the role of the user'''
+
+        return self.role_user
+
+
+    @role.setter
+    def role(self, role):
+
+        '''Function that verifies if the role input 
+        is correct and sets it. 
+        
+        Roles --> Admin, Provider'''
+
+        if role.lower() in ('aluno','professor'):
+            self.role_user = role
+
+        else: 
+            raise KeyError('User role not specified')
     @property
     def senha(self):
         "retorna que a senha não pode ser mostrada"
@@ -70,10 +91,10 @@ class User(BaseModel):
 
     def token(self) -> str:
 
-        return create_access_token(identity=self.id,
-                                expires_delta=timedelta(minutes=1000),
-                                fresh=True,
-                                additional_claims={"role_user" : self.role_user})
+        return create_access_token( identity=self.id,
+                                    expires_delta=timedelta(minutes=1000),
+                                    fresh=True,
+                                    additional_claims={"role": self.role})
 
     def refresh_token(self) -> str:
 

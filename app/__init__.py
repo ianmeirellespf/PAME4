@@ -1,6 +1,7 @@
 from flask import Flask
 from .config import config
-from .extensions import db , migrate , mail , jwt
+from .extensions import db , migrate , mail , jwt , ma
+
 
 from app.user.routes import user_api
 from app.auth.routes import auth_api
@@ -19,6 +20,7 @@ def create_app():
     mail.init_app(app)
     migrate.init_app(app,db)
     jwt.init_app(app)
+    ma.init_app(app)
 
     app.register_blueprint(user_api)
     app.register_blueprint(auth_api)
