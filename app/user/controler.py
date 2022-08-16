@@ -51,28 +51,7 @@ class UserId(MethodView):
     def delete(self, id):
 
         user_services.delete_by_id(id)
-
-
-class UserLogin(MethodView): 
-
-    def post(self):
-
-        schema = UserLoginschema()
-        dados = schema.load(request.json)
-
-        user = user_services.get_by_email(dados['email'])
-
-        if not user or not user.verify_password(dados['senha']):
-            return {"error": "usuario ou senha invalidos"}
         
-        token = create_access_token(identity=user.id)
-        
-        refresh_token= create_refresh_token(identity=user.id)
-
-        return {"user": Userschema().dump(user),
-                "token": token,
-                "refresh_token": refresh_token}, 200
-
 class TokenRefresh(MethodView):
 
     decorators = [jwt_required(refresh = True)]

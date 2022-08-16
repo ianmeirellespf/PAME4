@@ -28,17 +28,7 @@ class User(BaseModel):
 
 
 
-    '''@property
-    def role(self):
-        return self.role_user
-
-    @role.setter
-    def role(self , newrole):
-
-        if newrole.lower() in ('professor' , 'aluno'):
-            self.role_user = newrole.lower()
-        else:
-            raise KeyError('role nao especificado')'''
+    
 
     def role_specify(self):
         if self.role_user == 'aluno':
@@ -90,23 +80,27 @@ class User(BaseModel):
         return bcrypt.checkpw(senha.encode(),self.senha_hash) 
 
     def token(self) -> str:
+        return create_access_token(
+            identity = self.id,
+            additional_claims = {'role': self.role},
+            expires_delta = timedelta(minutes=1440), 
+            fresh=True
+        )
 
-        return create_access_token( identity=self.id,
-                                    expires_delta=timedelta(minutes=1000),
-                                    fresh=True,
-                                    additional_claims={"role": self.role})
 
     def refresh_token(self) -> str:
+        
+        return create_refresh_token(
+            identity = self.id,
+            additional_claims={'role': self.role},
+            expires_delta = timedelta(minutes=2880)
+        )
 
-        return create_refresh_token(identity=self.id,
-                                    expires_delta=timedelta(minutes=3000))
 
     @staticmethod
-    def verify_token(token) -> object :
-
+    def verify_token(token) -> object:
         try:
             data = decode_token(token)
-        
         except:
             return None
 
