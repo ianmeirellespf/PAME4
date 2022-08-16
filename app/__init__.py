@@ -22,6 +22,7 @@ def create_app():
 
     app.register_blueprint(user_api)
     app.register_blueprint(auth_api)
+   
     
     
     

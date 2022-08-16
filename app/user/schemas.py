@@ -4,10 +4,10 @@ from marshmallow import fields
 
 class Userschema(ma.SQLAlchemySchema) :
 
-   class Meta :
-    model= User
-    load_instance = True
-    ordered = True
+    class Meta:
+        model= User
+        load_instance = True
+        ordered = True
 
     id = ma.Integer(dump_only=True)
     nome = ma.String(requiered = True)
@@ -16,7 +16,7 @@ class Userschema(ma.SQLAlchemySchema) :
     senha=ma.String(load_only=True ,requiered = True)
     data_nascimento = ma.String(requiered = True)
     genero = ma.String(requiered = True)
-    role_user = ma.String( required=True)
+    role = ma.String()
 
 class UserLoginschema(ma.Schema):
     email = ma.Email(required=True)
