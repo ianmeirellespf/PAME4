@@ -13,6 +13,7 @@ bcrypt = "*"
 flask-jwt-extended = "*"
 marshmallow-sqlalchemy = "*"
 flask-marshmallow = "*"
+boto3 = "*"
 
 [dev-packages]
 
