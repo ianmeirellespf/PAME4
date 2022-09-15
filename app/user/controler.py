@@ -50,5 +50,3 @@ class UserId(MethodView):
     def delete(self, id):
 
         user_services.delete_by_id(id)
-
-
