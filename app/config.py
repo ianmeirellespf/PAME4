@@ -21,3 +21,4 @@ class config:
     AWS_BUCKET_NAME = os.getenv("AWS_BUCKET_NAME")
     AWS_PROJECT_NAME = os.getenv("AWS_PROJECT_NAME")
     AWS_REGION = os.getenv("AWS_REGION")
+    AWS_BUCKET_ENDPOINT = os.getenv("AWS_BUCKET_ENDPOINT")

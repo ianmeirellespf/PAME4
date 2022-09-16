@@ -18,7 +18,7 @@ class User(BaseModel):
     data_nascimento = db.Column(db.String(20))
     role_user = db.Column(db.String(30))
     genero = db.Column(db.String(20))
-   
+    
 
 
     #relacionamento one-to-many

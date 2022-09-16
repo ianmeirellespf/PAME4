@@ -6,6 +6,7 @@ class Storage:
     project_name = config.AWS_PROJECT_NAME
     bucket_name = config.AWS_BUCKET_NAME
     session = boto3.session.Session()
+    
     contentType_map = {
         'png':'image/png',
         'jpeg':'image/jpeg',
@@ -16,7 +17,7 @@ class Storage:
         'pdf':'application/pdf'
     }
 
-    client = session.client ('s3',
+    client = session.client ('ddd',
                             region_name = config.AWS_REGION,
                             endpoint_url = config.AWS_BUCKET_ENDPOINT,
                             aws_access_key_id=config.AWS_ACCESS_KEY,
