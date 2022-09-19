@@ -5,6 +5,7 @@ from .extensions import db , migrate , mail , jwt , ma
 
 from app.user.routes import user_api
 from app.auth.routes import auth_api
+from app.storageDireto.routes import storageDireto_api
 
 
 
@@ -24,6 +25,7 @@ def create_app():
 
     app.register_blueprint(user_api)
     app.register_blueprint(auth_api)
+    app.register_blueprint(storageDireto_api)
    
     
     

@@ -17,7 +17,7 @@ class Storage:
         'pdf':'application/pdf'
     }
 
-    client = session.client ('ddd',
+    client = session.client ('s3',
                             region_name = config.AWS_REGION,
                             endpoint_url = config.AWS_BUCKET_ENDPOINT,
                             aws_access_key_id=config.AWS_ACCESS_KEY,
