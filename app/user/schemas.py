@@ -21,3 +21,11 @@ class Userschema(ma.SQLAlchemySchema) :
 class UserLoginschema(ma.Schema):
     email = ma.Email(required=True)
     senha = ma.String(required=True, load_only=True)
+
+
+class SenhaNovaSchema(ma.Schema):
+
+    email = ma.Email(required=True) #pede o email pra que vai enviar
+    senha = ma.String(required=True, load_only=True) #a senha nova
+
+    verificar = ma.String(required=True, load_only=True) #a verificação por email
