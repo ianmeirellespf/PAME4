@@ -22,4 +22,8 @@ class UserLoginschema(ma.Schema):
     email = ma.Email(required=True)
     senha = ma.String(required=True, load_only=True)
 
+class UserEmailschema(ma.Schema):
+    email = ma.Email(required=True)
+    
+
 

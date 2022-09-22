@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class config:
-    SQLALCHEMY_DATABASE_URI = os.getenv("SQLALCHEMY_DATABASE_URI")
+    SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"#os.getenv("SQLALCHEMY_DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     DEBUG = False
     JWT_SECRET_KEY =os.getenv("SECRET_KEY")
@@ -15,7 +15,7 @@ class config:
     MAIL_USERNAME = os.getenv("MAIL_USERNAME")
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     MAIL_USE_TLS = os.getenv("MAIL_USE_TLS")
-    MAIL_USE_SSL = os.getenv("MAIL_USE_SSL")
+    
 
     AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
     AWS_SECRET_ACCESS_KEY =os.getenv("AWS_SECRET_ACCESS_KEY")

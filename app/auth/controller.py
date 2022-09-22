@@ -1,4 +1,4 @@
-from app.user.schemas import Userschema ,UserLoginschema
+from app.user.schemas import Userschema ,UserLoginschema,UserEmailschema
 from app.user.services import user_services
 from app.user.model import User
 from app.auth.schemas import SenhaNovaSchema
@@ -58,7 +58,7 @@ class TokenRefresh(MethodView):
 class MudaSenhaEmail(MethodView): # /esquecisenhaemail
 
     def post(self):
-        schema = UserLoginschema()
+        schema = UserEmailschema()
         
         dados = schema.load(request.json)
         user = User.query.filter_by(email=dados['email']).first_or_404()
@@ -77,7 +77,7 @@ class MudaSenhaEmail(MethodView): # /esquecisenhaemail
             
         mail.send(msg)
 
-        return user.json(), 200
+        return "foi enviado o pin", 200
 
         
 
