@@ -63,7 +63,7 @@ class MudaSenhaEmail(MethodView): # /esquecisenhaemail
         dados = schema.load(request.json)
         user = User.query.filter_by(email=dados['email']).first_or_404()
         
-        tamanho_string = 50
+        tamanho_string = 8
         
         PinVerificação = ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(tamanho_string))
         
@@ -73,7 +73,7 @@ class MudaSenhaEmail(MethodView): # /esquecisenhaemail
         #mandando email de mudança de senha com pin.
         msg = Message(sender= 'ianmeirelles@poli.ufrj.br',
              recipients=[user.email],subject='mudança de senha',
-             html= render_template('mudaSenha.html', nome = user.nome))
+             html= render_template('mudaSenha.html', nome = user.nome , PinVerificação = PinVerificação))
             
         mail.send(msg)
 

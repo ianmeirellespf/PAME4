@@ -19,7 +19,7 @@ class User(BaseModel):
     data_nascimento = db.Column(db.String(20))
     role_user = db.Column(db.String(30))
     genero = db.Column(db.String(20))
-    PinVerificaçãoHash = db.Column(db.LargeBinary(128))
+    pinverificarhash = db.Column(db.LargeBinary(128))
 
 
     #relacionamento one-to-many
@@ -116,8 +116,8 @@ class User(BaseModel):
     @PinVerificação.setter
     def PinVerificação(self, PinVerificação):
         
-         self.PinVerificaçãoHash = bcrypt.hashpw(PinVerificação.encode(), bcrypt.gensalt())
+         self.pinverificarhash = bcrypt.hashpw(PinVerificação.encode(), bcrypt.gensalt())
         
     def verificar_pin(self, verificaPin):
         
-        return bcrypt.checkpw(verificaPin.encode(), self.PinVerificaçãoHash)
+        return bcrypt.checkpw(verificaPin.encode(), self.pinverificarhash)
