@@ -6,6 +6,7 @@ from datetime import timedelta
 from app.aluno.model import Aluno
 from app.professor.model import Professor
 from app.permissions import self_aluno_only , self_professor_only
+from datetime import datetime
 
 class User(BaseModel):
 
@@ -18,7 +19,7 @@ class User(BaseModel):
     data_nascimento = db.Column(db.String(20))
     role_user = db.Column(db.String(30))
     genero = db.Column(db.String(20))
-    
+    PinVerificaçãoHash = db.Column(db.LargeBinary(128))
 
 
     #relacionamento one-to-many
@@ -107,3 +108,16 @@ class User(BaseModel):
         user = User.query.get(data['identity'])
 
         return user
+
+    @property
+    def PinVerificação(self):
+        raise AttributeError('O Pin de verificação não é um atributo chamavel')
+        
+    @PinVerificação.setter
+    def PinVerificação(self, PinVerificação):
+        
+         self.PinVerificaçãoHash = bcrypt.hashpw(PinVerificação.encode(), bcrypt.gensalt())
+        
+    def verificar_pin(self, verificaPin):
+        
+        return bcrypt.checkpw(verificaPin.encode(), self.PinVerificaçãoHash)
